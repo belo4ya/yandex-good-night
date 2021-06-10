@@ -51,6 +51,8 @@ class MaxStack:
         if elem == self._peek_max():
             self._max_values.pop()
 
+        return elem
+
     def max(self):
         if self._stack:
             return self._peek_max()
