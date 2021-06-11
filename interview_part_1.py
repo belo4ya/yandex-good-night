@@ -67,19 +67,15 @@ class MaxStack:
 # - [0, 2, 4, 5, 8] => "0, 2, 4-5, 8"
 
 
-def render(start, end=None):
-    start = str(start)
-    if end:
-        return start + '-' + str(end)
-
-    return start
-
-
 def compress(int_array):
-    """
-    TODO: переделать
-    TODO: doctests
-    """
+
+    def render(start, end=None):
+        start = str(start)
+        if end:
+            return start + '-' + str(end)
+
+        return start
+
     if len(int_array) == 0:
         return ''
     if len(int_array) == 1:
@@ -112,8 +108,8 @@ def compress(int_array):
 # ***************************** 4 *****************************
 # -------------------------------------------------------------
 # SQL
-# таблица (продукт дата цена)
-# если цена изменилась заносится данные
+# таблица (продукт - дата - цена)
+# если цена изменилась заносятся данные
 # актуальный срез цен на заданную дату
 stmt = """
 SELECT product_name, price FROM products p1
