@@ -15,16 +15,7 @@ import math
 
 def get_first_matching_object(predicate, objects):
     matching_objects = (obj for obj in objects if predicate(obj))
-    try:
-        return next(matching_objects)
-    except StopIteration:
-        return  # на самом деле None - тоже не лучший вариант, лучше raise
-
-
-# 1) изменяемый дефолтный аргумент
-# 2) object -> obj
-# 3) matching_objects - генератор
-# 4) излишний None
+    return next(matching_objects, None)  # допущение что нет функции is_none
 
 
 # ***************************** 2 *****************************
@@ -37,7 +28,7 @@ class MaxStack:
 
     def __init__(self):
         self._stack = []
-        self._max_values = []
+        self._max_values = [-math.inf]
 
     def push(self, elem):
         self._stack.append(elem)
@@ -57,8 +48,8 @@ class MaxStack:
         if self._stack:
             return self._peek_max()
 
-    def _peek_max(self):  # дефолтное значение помогло бы отказаться от if
-        return self._max_values[-1] if self._max_values else -math.inf
+    def _peek_max(self):
+        return self._max_values[-1]
 
 
 # ***************************** 3 *****************************
