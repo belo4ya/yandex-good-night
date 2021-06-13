@@ -57,17 +57,28 @@ class MaxStack:
 # Дан список целых чисел, повторяющихся элементов в списке нет.
 # Нужно преобразовать это множество в строку,
 # сворачивая соседние по числовому ряду числа в диапазоны.
-#
-# Примеры:
-# - [1, 4, 5, 2, 3, 9, 8, 11, 0] => "0-5,8-9,11"
-# - [1, 4, 3, 2] => "1-4"
-# - [1, 4] => "1,4"
-# - [1, 4, 5, 2, 3, 9, 8, 0] => "0-5,8-9"
-# - [0, 1, 2, 3, 5, 8, 10, 12] => "0-3, 5, 8, 10, 12"
-# - [0, 2, 4, 5, 8] => "0, 2, 4-5, 8"
 
 
 def compress(int_array):
+    """
+    >>> compress([1, 4, 5, 2, 3, 9, 8, 11, 0])
+    '0-5,8-9,11'
+
+    >>> compress([1, 4, 3, 2])
+    '1-4'
+
+    >>> compress([1, 4])
+    '1,4'
+
+    >>> compress([1, 4, 5, 2, 3, 9, 8, 0])
+    '0-5,8-9'
+
+    >>> compress([0, 1, 2, 3, 5, 8, 10, 12])
+    '0-3,5,8,10,12'
+
+    >>> compress([0, 2, 4, 5, 8])
+    '0,2,4-5,8'
+    """
 
     def render(begin, end=None):
         begin = str(begin)
@@ -89,11 +100,12 @@ def compress(int_array):
         current_el = sorted_array[i]
         start_range_el = sorted_array[start_range_index]
 
-        if current_el - prev_el > 1:
+        if current_el != prev_el + 1:
             if start_range_index == i - 1:
                 ranges.append(render(start_range_el))
             else:
                 ranges.append(render(start_range_el, prev_el))
+
             start_range_index = i
 
     if start_range_index == array_length - 1:
@@ -110,7 +122,7 @@ def compress(int_array):
 # таблица (продукт - дата - цена)
 # если цена изменилась заносятся данные
 # актуальный срез цен на заданную дату
-stmt = """
+stmt_0 = """
 SELECT product_name, price FROM products p1
 WHERE updated_at = (
     SELECT MAX(updated_at) FROM products p2
