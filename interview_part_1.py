@@ -69,12 +69,9 @@ class MaxStack:
 
 def compress(int_array):
 
-    def render(start, end=None):
-        start = str(start)
-        if end:
-            return start + '-' + str(end)
-
-        return start
+    def render(begin, end=None):
+        begin = str(begin)
+        return begin + '-' + str(end) if end else begin
 
     array_length = len(int_array)
 
