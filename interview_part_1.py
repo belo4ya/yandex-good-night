@@ -82,24 +82,24 @@ def compress(int_array):
 
     sorted_array = sorted(int_array)
     ranges = []
-    start_index = 0
+    start_range_index = 0
 
     for i in range(1, array_length):
-        current = sorted_array[i]
-        prev = sorted_array[i - 1]
-        start = sorted_array[start_index]
+        prev_el = sorted_array[i - 1]
+        current_el = sorted_array[i]
+        start_range_el = sorted_array[start_range_index]
 
-        if current - prev > 1:
-            if start_index == i - 1:
-                ranges.append(render(start))
+        if current_el - prev_el > 1:
+            if start_range_index == i - 1:
+                ranges.append(render(start_range_el))
             else:
-                ranges.append(render(start, prev))
-            start_index = i
+                ranges.append(render(start_range_el, prev_el))
+            start_range_index = i
 
-    if start_index == array_length - 1:
+    if start_range_index == array_length - 1:
         ranges.append(render(sorted_array[-1]))
     else:
-        ranges.append(render(sorted_array[start_index], sorted_array[-1]))
+        ranges.append(render(sorted_array[start_range_index], sorted_array[-1]))
 
     return ','.join(ranges)
 
