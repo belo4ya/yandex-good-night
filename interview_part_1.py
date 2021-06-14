@@ -142,9 +142,10 @@ FROM PRODUCTS p;
 """
 
 stmt_2 = """
-
-"""
-
-stmt_3 = """
-
+SELECT product_name, price FROM (
+    SELECT product_name, price, ROW_NUMBER() OVER (
+        PARTITION BY product_name ORDER BY updated_at DESC
+        ) row FROM PRODUCTS WHERE updated_at <= :slice_date
+    ) t
+WHERE t.row = 1;
 """
