@@ -133,5 +133,18 @@ WHERE updated_at = (
 """
 
 stmt_1 = """
+SELECT *, (
+    SELECT price FROM PRODUCTS sub
+    WHERE sub.product_name == p.product_name AND sub.updated_at <= :slice_date
+    ORDER BY sub.updated_at DESC LIMIT 1
+    ) AS target_price
+FROM PRODUCTS p;
+"""
+
+stmt_2 = """
+
+"""
+
+stmt_3 = """
 
 """
