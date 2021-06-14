@@ -122,12 +122,16 @@ def compress(int_array):
 # таблица (продукт - дата - цена)
 # если цена изменилась заносятся данные
 # актуальный срез цен на заданную дату
+
 stmt_0 = """
 SELECT product_name, price FROM products p1
 WHERE updated_at = (
     SELECT MAX(updated_at) FROM products p2
-    WHERE p1.product_name == p2.product_name AND
-          p2.updated_at <= :slice_date
+    WHERE p1.product_name == p2.product_name AND p2.updated_at <= :slice_date
     GROUP BY p2.product_name
     );
+"""
+
+stmt_1 = """
+
 """
