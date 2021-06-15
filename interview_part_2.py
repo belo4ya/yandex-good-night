@@ -45,13 +45,10 @@ def popup_zeros(nums):
 
 # ***************************** 2 *****************************
 # -------------------------------------------------------------
+# Дан массив точек с целочисленными координатами (x, y).
+# Определить, существует ли вертикальная прямая,
+# делящая точки на 2 симметричных относительно этой прямой множества.
 
-"""
-Дан массив точек с целочисленными координатами (x, y).
-Определить, существует ли вертикальная прямая, 
-делящая точки на 2 симметричных относительно этой прямой множества.
-Note: Для удобства точку можно представлять не как массив [x, y], а как объект {x, y}
-"""
 
 # is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0), (4, 0)])  # True
 # is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0)])  # False
@@ -69,18 +66,28 @@ def is_vert_sym(points):
     if not points:
         return True
 
-    points = sorted(points, key=lambda x: x[0])
-    sym_points = set(points)
+    sym_points = set(points)  # допущение, что несколько одинаковых точек симметричны одной
 
-    max(points)
-    min(points)
+    left_x = min(points, key=lambda p: p[0])[0]
+    right_x = max(points, key=lambda p: p[0])[0]
+    center_x = left_x + (right_x - left_x) / 2
 
-    center_x = points[0][0] + (points[-1][0] - points[0][0]) / 2
+    for point in sym_points:
+        point_x, point_y = point[0], point[1]
 
-    for point in points:
-        if point[0] == center_x:
+        distance = abs(center_x - point_x)
+        if point_x < center_x:
+            mirror_x = center_x - distance
+        elif point_x > center_x:
+            mirror_x = center_x + distance
+        else:
             continue
 
-        sym_point = (point[0], point[1])
+        mirror_point = (mirror_x, point_y)
+        if mirror_point not in sym_points:
+            return False
 
     return True
+
+
+print(is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0), (4, 0)]))
