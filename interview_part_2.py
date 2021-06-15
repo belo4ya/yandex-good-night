@@ -70,18 +70,17 @@ def is_vert_sym(points):
         return True
 
     points = sorted(points, key=lambda x: x[0])
+    sym_points = set(points)
 
+    max(points)
+    min(points)
 
-    center_pos = len(points) // 2
     center_x = points[0][0] + (points[-1][0] - points[0][0]) / 2
 
-    for i in range(center_pos):
-        left = points[i]
-        right = points[-i - 1]
-        if left[1] != right[1]:
-            return False
+    for point in points:
+        if point[0] == center_x:
+            continue
 
-        if center_x - left[0] != right[0] - center_x:
-            return False
+        sym_point = (point[0], point[1])
 
     return True
