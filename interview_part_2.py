@@ -42,7 +42,9 @@ def popup_zeros(nums):
 
     return copied
 
-# == == == == == == == == == == == == == == == == == == == == == == =
+
+# ***************************** 2 *****************************
+# -------------------------------------------------------------
 
 """
 Дан массив точек с целочисленными координатами (x, y).
@@ -50,9 +52,6 @@ def popup_zeros(nums):
 делящая точки на 2 симметричных относительно этой прямой множества.
 Note: Для удобства точку можно представлять не как массив [x, y], а как объект {x, y}
 """
-#   .
-#  /\
-# /  \
 
 # is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0), (4, 0)])  # True
 # is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0)])  # False
@@ -65,28 +64,18 @@ Note: Для удобства точку можно представлять н�
 # is_vert_sym([(4, 1), (4, 2), (6, 1), (6, 2)]])  # поломались
 
 
-def comparator(a, b):
-    return a - b
+def is_vert_sym(points):
 
-
-def sort_(comparators):
-    return comparators[0] or comparators[1]
-
-
-def is_vert_sym(lst):
-    if not lst:
+    if not points:
         return True
 
-    points = sorted(lst, key=lambda x: x[0])
+    points = sorted(points, key=lambda x: x[0])
 
-    psevdo_center = len(points) // 2
 
-    if len(points) % 2:
-        center_x = points[psevdo_center][0]
-    else:
-        center_x = points[psevdo_center - 1][0] + (points[psevdo_center][0] - points[psevdo_center - 1][0]) / 2
+    center_pos = len(points) // 2
+    center_x = points[0][0] + (points[-1][0] - points[0][0]) / 2
 
-    for i in range(psevdo_center):
+    for i in range(center_pos):
         left = points[i]
         right = points[-i - 1]
         if left[1] != right[1]:
@@ -96,17 +85,3 @@ def is_vert_sym(lst):
             return False
 
     return True
-
-#
-# def is_vert_sym(lst):
-#     if not lst:
-#         return True
-#
-#
-# points = sorted(lst, key=lambda x: x[0])
-# center_x = points[0][0] + (points[-1][0] - points[0][0]) / 2
-# for i in range(psevdo_center):
-#     left = points[i]
-#     right = points[-i - 1]
-#
-#
