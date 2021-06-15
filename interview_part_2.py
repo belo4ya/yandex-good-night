@@ -1,19 +1,46 @@
-# [0, 1, 2, 3, 1, 0, 0, 0, 2] -> [1, 2, 3, 1, 1, 2, 0, 0, 0]
-# [0, 1, 0, 0, 2, 3, 0] -> [1, 2, 3, 0, 0, 0, 0]  # 2
-# [0, 1, 2, 0, 3] -> [1, 2, 3, 0, 0]
-# [0] -> [0]
-# [3, 0, 2, 0] ->  # поломались
-# [3, 2, 0, 3] -> [3, 2, 3]
-# [] -> []
-def moveZeros(nums):
+# ***************************** 1 *****************************
+# -------------------------------------------------------------
+# Дан список, состоящий из целых чисел. Нужно 'поднять' нули
+# в конец списка с сохранением порядка за один проход
+
+
+def popup_zeros(nums):
+    """
+    >>> popup_zeros([0, 1, 2, 3, 1, 0, 0, 0, 2])
+    [1, 2, 3, 1, 2, 0, 0, 0, 0]
+
+    >>> popup_zeros([0, 1, 0, 0, 2, 3, 0])
+    [1, 2, 3, 0, 0, 0, 0]
+
+    >>> popup_zeros([0, 1, 2, 0, 3])
+    [1, 2, 3, 0, 0]
+
+    >>> popup_zeros([3, 0, 2, 0])
+    [3, 2, 0, 0]
+
+    >>> popup_zeros([3, 2, 0, 3])
+    [3, 2, 3, 0]
+
+    >>> popup_zeros([0])
+    [0]
+
+    >>> popup_zeros([3])
+    [3]
+
+    >>> popup_zeros([])
+    []
+    """
+    copied = nums[:]
     first_zero_pos = 0
-    for i in range(len(nums) - 1):
-        if nums[i] != 0:
+    for i in range(len(copied) - 1):
+        if copied[i] != 0:
             first_zero_pos += 1
 
-        elif nums[i] == 0 and nums[i + 1] != 0:
-            nums[first_zero_pos], nums[i + 1] = nums[i + 1], nums[first_zero_pos]
+        elif copied[i + 1] != 0:
+            copied[first_zero_pos], copied[i + 1] = copied[i + 1], copied[first_zero_pos]
             first_zero_pos += 1
+
+    return copied
 
 # == == == == == == == == == == == == == == == == == == == == == == =
 
