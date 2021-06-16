@@ -62,6 +62,31 @@ def popup_zeros(nums):
 
 
 def is_vert_sym(points):
+    """
+    >>> is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0), (4, 0)])
+    True
+
+    >>> is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0)])
+    True
+
+    >>> is_vert_sym([(4, 1), (4, 2), (6, 1), (6, 2)])
+    True
+
+    >>> is_vert_sym([(0, 0), (1, 0), (3, 0)])
+    False
+
+    >>> is_vert_sym([(0, 0), (11, 1)])
+    False
+
+    >>> is_vert_sym([(0, 0), (10, 0)])
+    True
+
+    >>> is_vert_sym([(0, 0)])
+    True
+
+    >>> is_vert_sym([])
+    True
+    """
 
     if not points:
         return True
