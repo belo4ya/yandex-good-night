@@ -100,19 +100,12 @@ def is_vert_sym(points):
     for point in sym_points:
         point_x, point_y = point[0], point[1]
 
-        distance = abs(center_x - point_x)
-        if point_x < center_x:
-            mirror_x = center_x - distance
-        elif point_x > center_x:
-            mirror_x = center_x + distance
-        else:
+        if point_x == center_x:
             continue
 
+        mirror_x = center_x + (center_x - point_x)
         mirror_point = (mirror_x, point_y)
         if mirror_point not in sym_points:
             return False
 
     return True
-
-
-print(is_vert_sym([(0, 0), (0, 0), (1, 1), (2, 2), (3, 1), (4, 0), (4, 0)]))
