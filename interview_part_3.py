@@ -20,6 +20,7 @@ def minus(it1, it2):
                 break
             elif el1 == el2:
                 break
+                
             el2 = next(it2, None)
 
         if el2 is None:
