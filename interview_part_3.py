@@ -1,3 +1,35 @@
+# [0, 1, 3, 3, 4, 6, 8, 8, 10]
+# [1, 2, 4, 4, 8]
+# Последовательности отсортированы
+# [0, 3, 3, 6, 10]
+# next(it, None) -> None, если всё закончилось
+
+# [2, 3, 6, 7, 9]
+# [-1, 2, 6, 6, 6]
+# [3, 7, 9]
+
+
+def minus(it1, it2):
+    result = []
+    el2 = next(it2, None)
+
+    for el1 in it1:
+
+        while el2 is not None:
+
+            if el1 < el2:
+                result.append(el1)
+                break
+            elif el1 == el2:
+                break
+            el2 = next(it2, None)
+
+        if el2 is None:
+            result.append(el1)
+
+    return result
+
+
 a1 = 'ABCBABCBDAB'
 a2 = 'ABCDABCDEFA'
 
