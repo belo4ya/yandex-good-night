@@ -39,8 +39,10 @@ def minus(it1, it2):
     return result
 
 
-a1 = 'ABCBABCBDAB'
-a2 = 'ABCDABCDEFA'
+# ***************************** 2 *****************************
+# -------------------------------------------------------------
+# a1 = 'ABCBABCBDAB'
+# a2 = 'ABCDABCDEFA'
 
 
 def length_of_longest_substr(s):
@@ -57,3 +59,7 @@ def length_of_longest_substr(s):
         checklist[v] = i
 
     return max_l
+
+
+# ABCBAB > CBDA < B
+print(length_of_longest_substr('ABCBABCBDAB'))
