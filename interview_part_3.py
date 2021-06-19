@@ -49,17 +49,18 @@ def length_of_longest_substr(s):
     checklist = {}
     start = 0
     max_l = 0
-    for i, v in enumerate(s):
-        if v in checklist:
-            if checklist[v] >= start:
-                start = checklist[v] + 1
+    for i, ch in enumerate(s):
+        if ch in checklist:
+            if checklist[ch] >= start:
+                start = checklist[ch] + 1
 
         current_l = i - start
         max_l = max(current_l, max_l)
-        checklist[v] = i
+        checklist[ch] = i
 
     return max_l
 
 
 # ABCBAB > CBDA < B
+print(length_of_longest_substr('ABCBABCBDAB'))
 print(length_of_longest_substr('ABCBABCBDAB'))
