@@ -45,22 +45,29 @@ def minus(it1, it2):
 # a2 = 'ABCDABCDEFA'
 
 
-def length_of_longest_substr(s):
-    checklist = {}
+def length_of_longest_substr(string):
+    """
+    >>> length_of_longest_substr('ABCBABCBDAB')
+    4
+    >>> length_of_longest_substr('ABCDEFABCDEFABCDEFG')
+    7
+    >>> length_of_longest_substr('ABABABBC')
+    2
+    >>> length_of_longest_substr('ABCB')
+    3
+    >>> length_of_longest_substr('')
+    0
+    """
+    last_meted = {}
     start = 0
-    max_l = 0
-    for i, ch in enumerate(s):
-        if ch in checklist:
-            if checklist[ch] >= start:
-                start = checklist[ch] + 1
+    max_length = 0
+    for i, ch in enumerate(string):
+        if ch in last_meted:
+            if last_meted[ch] >= start:
+                start = last_meted[ch] + 1
 
-        current_l = i - start
-        max_l = max(current_l, max_l)
-        checklist[ch] = i
+        current_length = i + 1 - start
+        max_length = max(current_length, max_length)
+        last_meted[ch] = i
 
-    return max_l
-
-
-# ABCBAB > CBDA < B
-print(length_of_longest_substr('ABCBABCBDAB'))
-print(length_of_longest_substr('ABCBABCBDAB'))
+    return max_length
