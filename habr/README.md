@@ -1,1 +1,1 @@
-[link](https://habr.com/ru/post/550088/)
+[-> ссылка (link'a) <-](https://habr.com/ru/post/550088/)
