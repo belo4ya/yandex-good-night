@@ -8,13 +8,11 @@
 import itertools
 
 
-def beautiful_rle(string):
-    for char, same in itertools.groupby(string):
-        count = sum([1 for _ in same])
-        yield char if count == 1 else str(count) + char
-
-
 def rle(string):
+    """
+    >>> rle('AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB')
+    'A4B3C2XYZD4E3F3A6B28'
+    """
     result = []
     cnt = 0
     prev_ch = string[0]
@@ -34,3 +32,9 @@ def rle(string):
         result.append(str(cnt + 1))
 
     return ''.join(result)
+
+
+def cheat_rle(string):
+    for char, same in itertools.groupby(string):
+        count = sum([1 for _ in same])
+        yield char if count == 1 else str(count) + char
