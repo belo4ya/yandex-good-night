@@ -1,9 +1,7 @@
 # Дан массив из нулей и единиц.
 # Нужно определить, какой максимальный по длине интервал единиц можно получить,
 # удалив ровно один элемент массива.
-# [1, 1, 0]
-
-# пример: [0, 0, 1, 1, 0, 1, 1, 0]
+# пример: [0, 0, 1, 1, 0, 1, 1, 0] -> 4
 
 
 # def max_ones_length(lst):
@@ -55,21 +53,39 @@
 
 
 def max_ones_length(lst):
-    max_length = 0
+    ones_len_current = 0
+    ones_len_prev = 0
 
-    last_el = None
-    current_length = 0
-    groups = []
+    zeros_len = 0
+    max_ones_len = 0
 
-    for i in range(len(lst)):
-        el = lst[i]
+    prev_el = None
+    for i, el in enumerate(lst):
+
+        if prev_el != el:  # произошла смена
+            print(ones_len_prev, zeros_len)
+
+            if el == 0:  # с 1 на 0
+                max_ones_len = max(max_ones_len, ones_len_current + ones_len_prev)
+
+                if zeros_len == 1:
+                    ones_len_prev = ones_len_current
+                else:
+                    ones_len_prev = 0
+
+                ones_len_current = 0
+            else:  # с 0 на 1
+                zeros_len = 0
+
         if el == 1:
-            current_length += 1
+            ones_len_current += 1
         else:
-            next_i = i + 1
-            if next_i < len(lst):
-                next_el = lst[next_i]
+            zeros_len += 1
+
+        prev_el = el
+
+    return max_ones_len
 
 
-data = [0, 0, 1, 1, 0, 1, 1, 0]
-max_ones_length(data)
+data = [0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1]
+print(max_ones_length(data))
