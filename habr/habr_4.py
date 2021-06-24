@@ -5,6 +5,22 @@
 
 
 def max_ones_length(lst):
+    """
+    >>> max_ones_length([0, 0, 1, 1, 0, 1, 1, 0])
+    4
+
+    >>> max_ones_length([0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1])
+    5
+
+    >>> max_ones_length([1, 1, 1, 1, 1, 1, 1])
+    7
+
+    >>> max_ones_length([0, 0, 0, 0])
+    0
+
+    >>> max_ones_length([])
+    0
+    """
     ones_len_current = 0
     ones_len_prev = 0
 
@@ -13,11 +29,10 @@ def max_ones_length(lst):
 
     prev_el = None
     for i, el in enumerate(lst):
-        print(f'{i}: max: {max_ones_len}')
 
-        if el == 1:
+        if el == 1:  # считаем 1
             ones_len_current += 1
-        else:
+        else:  # считаем 0
             zeros_len += 1
 
         if prev_el != el:  # произошла смена
@@ -37,7 +52,3 @@ def max_ones_length(lst):
         prev_el = el
 
     return max_ones_len
-
-
-data = [0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1]
-print(max_ones_length(data))
